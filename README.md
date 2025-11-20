@@ -1,0 +1,2 @@
+# NyayaSetu-A-Web-Based-Platform-for-Automated-Case-Management-Legal-Education-AI-Driven-Advice-
+NyayaSetu is a Django-powered web platform for legal case management, automated document generation, learning, and AI-driven legal advice. Streamlines law workflows for advocates, students, and public users. Features automated case import, role-based dashboards, document generator, learning modules, Q&amp;A forum, exports, and a smart legal bot.
