@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- Bootstrap JS (For dropdown) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<div class="container legal-learn-detail-wrapper py-5">
+  <div class="card legal-learn-detail-card animated fadeInUp" style="margin:auto;max-width:900px;">
+    <div class="card-body">
+      <h2 class="legal-learn-detail-title">{{ resource.title }}</h2>
+      <span class="badge legal-learn-topic">{{ resource.get_topic_display }}</span>
+      <div class="legal-learn-detail-content mt-4 mb-3">{{ resource.content|linebreaks }}</div>
+      <div class="text-muted legal-learn-detail-date">
+        Published: {{ resource.created_at|date:"d M Y" }}
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+.legal-learn-detail-wrapper { background:#f3faff;border-radius:14px; }
+.legal-learn-detail-card { border-radius:14px;background:#fdfdff;box-shadow: 0 12px 28px #81bbccd0;}
+.legal-learn-detail-title { font-family:'Montserrat',sans-serif;color:#097fb8;font-weight:700; }
+.legal-learn-detail-content { font-family:'Times New Roman',serif;line-height:1.6;color:#444e55;font-size:1.12em; }
+.legal-learn-detail-date{ font-size:.88em;opacity:.78;}
+</style>
+{% endblock %}

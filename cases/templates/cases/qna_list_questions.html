@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- Bootstrap JS (For dropdown) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<div class="container qna-list-wrapper py-4">
+  <h2 class="qna-list-title mb-4">Questions Pending Reply</h2>
+  {% if questions %}
+    <ul class="list-group qna-list-group">
+      {% for q in questions %}
+        <li class="list-group-item qna-list-item d-flex justify-content-between align-items-center">
+          <div>
+            <strong>{{ q.subject }}</strong> - {{ q.question_text|truncatechars:100 }}
+            <br>
+            <small class="text-muted">Asked by {{ q.author.username }} on {{ q.created_at|date:"d M Y, H:i" }}</small>
+          </div>
+          <a href="{% url 'cases:qna_reply_question' q.id %}" class="btn btn-outline-primary qna-reply-btn">Reply</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No questions found.</p>
+  {% endif %}
+</div>
+
+<style>
+.qna-list-wrapper { background: #fef6e4; border-radius: 12px; box-shadow: 0 6px 15px rgba(139,115,80,.25); }
+.qna-list-title { font-family: 'Montserrat', sans-serif; font-weight: 700; color: #6b4226; }
+.qna-list-group { max-height: 70vh; overflow-y: auto; }
+.qna-list-item:hover { background: #ffe9d9; cursor: pointer; transition: background 0.3s ease; }
+.qna-reply-btn { font-weight: 600; color: #c0862b; }
+.qna-reply-btn:hover { background-color: #a46b17; color: white; }
+</style>
+{% endblock %}

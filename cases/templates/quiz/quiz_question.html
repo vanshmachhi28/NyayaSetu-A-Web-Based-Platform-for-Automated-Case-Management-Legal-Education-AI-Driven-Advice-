@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load quiz_tags %}
+{% block content %}
+<!-- Bootstrap JS (For dropdown) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<div class="container mt-5 d-flex justify-content-center align-items-center" style="min-height:70vh;">
+  <div class="card p-4 shadow quiz-box border-0 rounded position-relative" style="max-width:500px;width:100%;background: linear-gradient(135deg, #eedfcc 80%, #ffe8d2 100%);">
+    <h4 class="mb-3 text-center" style="color:#9f6e43;font-weight:bold;">Quiz Question {{index}} of {{total}}</h4>
+    <p class="mb-4 fs-5 fw-medium" style="color:#3e2723;">{{ question.question_text }}</p>
+    <form method="post" id="quizForm">
+      {% csrf_token %}
+      {% for opt in options %}
+    <div class="form-check mb-2">
+        <input class="form-check-input big-radio" type="radio" name="selected" id="opt{{opt}}" value="{{opt}}" required>
+        <label class="form-check-label" for="opt{{opt}}" style="font-size:1.08rem;">
+            {{ question|get_option:opt }}
+        </label>
+    </div>
+{% endfor %}
+
+      <button class="btn w-100 mt-3" style="background:#9f6e43;color:white;font-weight:600;" type="submit">Next</button>
+    </form>
+    <div id="timer-quiz" class="text-end mt-2 pe-2" style="color:#c0392b;font-weight:bold;">
+      Time Left: <span id="timeleft">{{timer}}</span>s
+    </div>
+  </div>
+</div>
+<style>
+.quiz-box { transition:box-shadow .3s; }
+.quiz-box:hover { box-shadow: 0 0 32px rgba(120,72,39,.20); }
+.big-radio { width: 1.3em; height: 1.3em; vertical-align:middle;}
+</style>
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+  let timeleft = {{ timer }};
+  let timerEl = document.getElementById("timeleft");
+  let quizForm = document.getElementById("quizForm");
+  let expired = false;
+  let tick = setInterval(function(){
+    timeleft--;
+    timerEl.textContent = timeleft;
+    if (timeleft<=0) {
+      clearInterval(tick);
+      // Change value of a hidden input to signal timeout (add to form)
+      let timeoutInput = document.createElement('input');
+      timeoutInput.type = 'hidden';
+      timeoutInput.name = 'timeout';
+      timeoutInput.value = '1';
+      quizForm.appendChild(timeoutInput);
+      quizForm.submit();
+    }
+  },1000);
+});
+</script>
+
+{% endblock %}

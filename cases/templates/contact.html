@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="contact-page-bg py-5">
+  <div class="container" style="max-width:700px;">
+    <div class="card shadow p-4 rounded border-primary">
+      <h2 class="mb-3 text-center contact-title">Get in Touch</h2>
+      <p class="text-center contact-subtitle mb-4">Your questions and suggestions keep us just and evolving.</p>
+      {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        {% endfor %}
+      {% endif %}
+      <form method="post" novalidate>
+        {% csrf_token %}
+        <div class="mb-3">
+          {{ form.name.label_tag }}
+          {{ form.name }}
+          {{ form.name.errors }}
+        </div>
+        <div class="mb-3">
+          {{ form.email.label_tag }}
+          {{ form.email }}
+          {{ form.email.errors }}
+        </div>
+        <div class="mb-3">
+          {{ form.message.label_tag }}
+          {{ form.message }}
+          {{ form.message.errors }}
+        </div>
+        <button type="submit" class="btn btn-primary w-100 btn-submit">Send</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- Bootstrap JS (For dropdown) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<style>
+.contact-page-bg {
+  background: linear-gradient(135deg, #f0f4f8, #e7eaf6);
+  min-height: 100vh;
+}
+.contact-title {
+  font-family: 'Merriweather', serif;
+  font-weight: 700;
+  color: #2c3e50;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.contact-subtitle {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  color: #7d6b4e;
+}
+.btn-submit {
+  background: linear-gradient(90deg, #1f2b51, #6a4bb2);
+  border: none;
+  font-weight: 700;
+  font-size: 1.1em;
+  padding: 12px 0;
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+}
+.btn-submit:hover {
+  background: linear-gradient(90deg, #6a4bb2, #1f2b51);
+}
+input[type="text"], input[type="email"], textarea {
+  border-radius: 8px;
+  border: 1.5px solid #6a4bb2;
+  padding: 8px 12px;
+  font-size: 1em;
+  font-family: 'Source Sans Pro', sans-serif;
+  color: #2c3e50;
+  transition: border-color 0.25s ease;
+}
+input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
+  border-color: #392f85; 
+  outline: none;
+  box-shadow: 0 0 12px #a69fec88;
+}
+</style>
+{% endblock %}

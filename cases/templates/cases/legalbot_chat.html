@@ -1,0 +1,101 @@
+
+{% extends "base.html" %}
+{% block content %}
+<!-- Bootstrap JS (For dropdown) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<div class="container legalbot-container py-5 mb-4">
+  <div class="card legalbot-card shadow-lg">
+    <h3 class="legalbot-head mb-1">Chat with NyayaSetu Legal Bot</h3>
+    <p class="legalbot-desc mb-3">AI-powered help: confidential, fast, secure.<br>
+      <span class='text-warning'>Not a substitute for a real lawyer.</span>
+    </p>
+    <div class="legalbot-message-window mb-3" id="legalbot-message-window">
+      {% for user_q, bot_a, ts in legalbot_messages %}
+        <div class="legalbot-item useritem animate__animated animate__fadeIn mb-2">
+          <span class="legalbot-u">You:</span> {{ user_q }}
+          <span class="legalbot-time badge bg-light text-muted ms-2">{{ ts|date:"d M H:i" }}</span>
+        </div>
+        <div class="legalbot-item botitem animate__animated animate__fadeIn mb-3">
+          <span class="legalbot-b">Bot:</span> {{ bot_a }}
+        </div>
+      {% empty %}
+        <div class="text-secondary mb-3">No chats yet - ask your first question below!</div>
+      {% endfor %}
+      {% if bot_reply and not legalbot_messages %}
+        <div class="legalbot-item botitem animate__animated animate__fadeIn mb-3">
+          <span class="legalbot-b">Bot:</span> {{ bot_reply }}
+        </div>
+      {% endif %}
+    </div>
+    <form method="POST" class="legalbot-form animate__animated animate__fadeInUp">
+      {% csrf_token %}
+      <div class="input-group legalbot-input-group">
+        <input type="text" name="question" class="form-control legalbot-input" placeholder="Ask your legal question..." required>
+        <button type="submit" class="btn btn-primary legalbot-send-btn">
+          <i class="fas fa-paper-plane"></i> Send
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+<style>
+.legalbot-container { max-width: 550px; margin: auto; }
+.legalbot-card {
+  background: linear-gradient(130deg,#f3f9ff 62%,#ffeec9 100%);
+  border-radius: 23px;
+  padding: 38px 22px 29px 22px;
+  border: none;
+  min-height: 330px;
+}
+.legalbot-head { font-family:'Montserrat',sans-serif; color:#237688; font-weight:800; }
+.legalbot-desc {font-size:1.07em; color:#bc7e19;}
+.legalbot-message-window {
+  background: #f8fbfe;
+  border-radius: 17px;
+  height: 208px;
+  overflow-y: auto;
+  box-shadow: 0 2px 16px #dbe9fc44;
+  padding: 12px 9px 9px 14px;
+}
+.legalbot-item { font-size:1.1em; border-radius: 13px; padding: 7px 12px;}
+.useritem {
+  background: #e7f3fd;
+  color: #1a4c7c;
+  text-align:right;
+  margin-left: 62px; font-weight:600;
+}
+.botitem {
+  background: #fff6e3;
+  color: #b64701; font-weight:500;
+  text-align:left; margin-right: 62px;
+}
+.legalbot-u { font-weight:650;color:#205b97;}
+.legalbot-b { font-weight:750;color:#bf700a;}
+.legalbot-form { margin-top: 16px;}
+.legalbot-send-btn {
+  background: linear-gradient(90deg,#37c7eb80,#eea44db9)!important;
+  font-weight: 700;
+  border:none;
+  border-radius:0 13px 13px 0;
+  color:#fff;
+  box-shadow: 0 2px 7px #b7e4fa96;
+}
+.legalbot-send-btn:hover { background: linear-gradient(90deg,#6432d7d2,#b8870b);}
+.legalbot-input { border-radius: 13px 0 0 13px; font-size: 1.17em;}
+.legalbot-input-group {box-shadow:0 2px 14px #cebe7285;}
+.legalbot-time { font-size: 0.99em;vertical-align: middle;}
+</style>
+<script>
+  setTimeout(() => {
+    var objDiv = document.getElementById('legalbot-message-window');
+    objDiv.scrollTop = objDiv.scrollHeight;
+  }, 340);
+</script>
+{% endblock %}
+
+
+
+

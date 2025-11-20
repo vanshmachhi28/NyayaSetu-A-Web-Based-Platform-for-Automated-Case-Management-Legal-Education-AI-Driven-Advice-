@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- Bootstrap JS (For dropdown) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<div class="container py-4">
+  <h2 class="mb-4">My Q&A Forum Posts</h2>
+  {% if questions %}
+    <ul class="list-group">
+      {% for q in questions %}
+        <li class="list-group-item">
+          <strong>{{ q.subject }}</strong>: {{ q.question_text|truncatechars:120 }}<br>
+          <small class="text-muted">Posted {{ q.created_at|date:"d M Y, H:i" }}</small>
+          {% if q.answer %}
+            <span class="badge bg-success ms-2">Replied</span>
+            <div class="mt-2" style="border-left:3px solid #37b24d;padding-left:16px;">
+              <strong>Advocate Reply:</strong> {{ q.answer.answer_text }}
+            </div>
+          {% else %}
+            <span class="badge bg-warning text-dark ms-2">Pending</span>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <div class="alert alert-info mt-3">You haven't asked any questions yet.</div>
+  {% endif %}
+</div>
+{% endblock %}

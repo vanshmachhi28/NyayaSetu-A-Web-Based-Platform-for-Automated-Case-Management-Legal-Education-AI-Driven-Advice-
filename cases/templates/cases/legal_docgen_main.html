@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block content %}
+<!-- Bootstrap JS (For dropdown) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<div class="container docgen-tabs-wrapper py-5">
+  <h2 class="docgen-tabs-title mb-4 wow fadeInDown">Legal Document Generator</h2>
+  <ul class="nav docgen-nav-tabs mb-4" role="tablist" style="border-bottom: none;">
+    {% for doc in doc_templates %}
+      <li class="nav-item d-inline-block me-2" role="presentation" style="float:none;">
+        <a 
+          class="docgen-tab-link nav-link {% if forloop.first %}active{% endif %}" 
+          id="tab-{{ doc.doc_type }}" 
+          href="{% url 'cases:legal_docgen_form' doc.doc_type %}" 
+          style="display: inline-block; min-width: 210px;" 
+          role="tab"
+        >
+          {{ doc.title }}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+  <div class="docgen-tab-desc mt-4">
+    <p class="fs-5 fw-medium">
+      {% if doc_templates %}
+        {{ doc_templates.0.short_description }}
+      {% else %}
+        No document templates available.
+      {% endif %}
+    </p>
+  </div>
+</div>
+
+<style>
+.docgen-tabs-wrapper {
+  background: #fff8ed;
+  border-radius: 24px;
+  min-height: 45vh;
+  box-shadow: 0 10px 34px #dab97a22, 0 2px 8px #0001;
+  animation: fadeInUp 1s;
+}
+.docgen-tabs-title {
+  font-family: 'Montserrat',sans-serif;
+  font-weight: 700;
+  color: #a75c06;
+  text-shadow: 0 4px 12px #fff0;
+}
+
+.docgen-nav-tabs {
+  border-bottom: none;
+  overflow-x: auto;
+  white-space: nowrap;
+  background: transparent;
+  padding-bottom: 2px;
+}
+.docgen-tab-link {
+  font-size: 1.10em;
+  font-weight: 600;
+  background: linear-gradient(90deg, #ffe1bf 70%, #fdb886 100%);
+  color: #974501 !important;
+  border-radius: 15px 15px 0 0;
+  margin-right: 4px;
+  transition: background 0.22s, color 0.22s, box-shadow 0.25s;
+  border: none;
+  box-shadow: 0 2px 8px #fdb88644;
+}
+.docgen-tab-link.active, .docgen-tab-link:focus, .docgen-tab-link:hover {
+  background: linear-gradient(88deg, #fdb886, #ffd378);
+  color: #fff !important;
+  box-shadow: 0 4px 14px #fdb88644, 0 0px 0px #fff8ed;
+  outline: none !important;
+  border: none;
+  text-shadow: 0 2px 8px #d0850a70;
+}
+.docgen-tab-desc {
+  color: #8a6846; 
+  font-size: 1.18em;
+  margin-top: 30px;
+}
+@media (max-width: 600px) {
+  .docgen-tab-link {
+    min-width: 120px;
+    font-size: .9em;
+  }
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+</style>
+{% endblock %}

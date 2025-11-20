@@ -1,0 +1,39 @@
+<!-- file: cases/templates/export/export_options.html -->
+{% extends "base.html" %}
+{% block content %}
+<!-- Bootstrap JS (For dropdown) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<div class="export-container" style="padding: 50px; max-width: 400px; margin: auto;">
+    <h2 style="color: #4a372f; font-family: 'Times New Roman', serif; font-weight: bold; margin-bottom: 20px;">Export Reports or Drafts</h2>
+    
+    <form method="get" action="{% url 'cases:export_report' report_type='pdf' %}" class="export-form">
+        <button type="submit" class="btn btn-warning export-btn">Download PDF Report</button>
+    </form>
+    
+    <form method="get" action="{% url 'cases:export_report' report_type='csv' %}" class="export-form mt-3">
+        <button type="submit" class="btn btn-outline-primary export-btn">Download CSV Report</button>
+    </form>
+</div>
+
+<style>
+.export-btn {
+    width: 100%;
+    font-size: 1.3rem;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.export-btn:hover {
+    background-color: #c79342;
+    color: #fff;
+}
+
+.export-container {
+    background: linear-gradient(135deg, #f4e4d9 0%, #efdac1 100%);
+    border-radius: 12px;
+    box-shadow: 0px 12px 24px rgba(179, 141, 89, 0.3);
+}
+</style>
+{% endblock %}

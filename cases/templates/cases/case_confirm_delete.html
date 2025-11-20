@@ -1,0 +1,17 @@
+
+
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Bootstrap JS (For dropdown) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <h2>Delete Case</h2>
+    <p>Are you sure you want to delete the case "{{ object.title }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <a class="btn btn-sm btn-danger" href="{% url 'cases:case_delete' case.pk %}"><i class="fas fa-trash"></i>
+            Yes, delete</a>
+        <a href="{% url 'cases:case_list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+{% endblock %}

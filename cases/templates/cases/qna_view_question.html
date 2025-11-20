@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- Bootstrap JS (For dropdown) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<div class="container qna-view-wrapper py-5" style="max-width: 700px;">
+  <h2 class="qna-view-title mb-4">Question & Answer</h2>
+  <div class="qna-question-box p-3 mb-4" style="background:#fff5dc; border-radius: 10px; border: 1px solid #d5b76b;">
+    <p><strong>Subject:</strong> {{ question.subject }}</p>
+    <p><strong>Question:</strong> {{ question.question_text }}</p>
+    <p><small>Asked by {{ question.author.username }} on {{ question.created_at|date:"d M Y, H:i" }}</small></p>
+  </div>
+
+  {% if question.answer %}
+  <div class="qna-answer-box p-3" style="background:#f6f0e3; border-radius: 10px; border: 1px solid #b49c6b;">
+    <p><strong>Reply from Advocate:</strong> {{ question.answer.responder.username }}</p>
+    <p>{{ question.answer.answer_text }}</p>
+    <p><small>Replied on {{ question.answer.created_at|date:"d M Y, H:i" }}</small></p>
+  </div>
+  {% else %}
+  <p class="text-muted">No reply yet; please wait for a response from an advocate.</p>
+  {% endif %}
+</div>
+
+<style>
+.qna-view-wrapper { background: #fef6e4; border-radius: 12px; box-shadow: 0 6px 15px rgba(139,115,80,.25); }
+.qna-view-title { font-family: 'Montserrat', sans-serif; font-weight: 700; color: #6b4226; }
+.qna-question-box, .qna-answer-box { font-family: 'Times New Roman', serif; }
+</style>
+{% endblock %}

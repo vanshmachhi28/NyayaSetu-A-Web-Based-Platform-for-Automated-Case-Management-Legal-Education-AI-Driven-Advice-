@@ -1,0 +1,214 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<!-- Bootstrap JS (For dropdown) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <div id="lawFirmCarousel" class="carousel slide legal-carousel-bg mb-4" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#lawFirmCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#lawFirmCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#lawFirmCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  
+  <div class="carousel-inner legal-carousel-inner shadow-lg">
+    <div class="carousel-item active legal-carousel-item">
+      <img src="{% static 'images/slide1.jpg' %}" class="d-block w-100 legal-carousel-img" alt="Legal Concept">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="carousel-caption-title">Empowering Justice</h5>
+        <p class="carousel-caption-desc">Your legal journey simplified and supported.</p>
+      </div>
+    </div>
+    <div class="carousel-item legal-carousel-item">
+      <img src="{% static 'images/slide2.jpg' %}" class="d-block w-100 legal-carousel-img" alt="Law Books">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="carousel-caption-title">Knowledge is Power</h5>
+        <p class="carousel-caption-desc">Access legal resources and expert guidance.</p>
+      </div>
+    </div>
+    <div class="carousel-item legal-carousel-item">
+      <img src="{% static 'images/slide3.jpg' %}" class="d-block w-100 legal-carousel-img" alt="Justice Scale">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="carousel-caption-title">Trusted by Advocates</h5>
+        <p class="carousel-caption-desc">Manage your practice with confidence.</p>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#lawFirmCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#lawFirmCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+
+
+
+
+<div class="container mt-5">
+    <div class="custom-jumbotron bg-light border legal-stats-jumbo shadow-lg">
+        <h1 class="display-4 text-center legal-stats-title">Welcome to NyayaSetu!</h1>
+        <p class="lead text-center legal-stats-desc">Efficiently manage your law firm's needs with our comprehensive system.</p>
+        <hr class="my-4">
+
+        <div class="container legal-stats-cards">
+            <div class="row mt-4">
+                <div class="col-sm-4 mb-3">
+                    <div class="card legal-stats-card legal-stats-clients wow fadeInLeft">
+                        <div class="card-header">Clients</div>
+                        <div class="card-body">
+                            <h5 class="card-title legal-stats-value">{{ clients_count }}</h5>
+                            <p class="card-text">Total Clients</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 mb-3">
+                    <div class="card legal-stats-card legal-stats-lawyers wow fadeInUp">
+                        <div class="card-header">Lawyers</div>
+                        <div class="card-body">
+                            <h5 class="card-title legal-stats-value">{{ lawyers_count }}</h5>
+                            <p class="card-text">Total Lawyers</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 mb-3">
+                    <div class="card legal-stats-card legal-stats-cases wow fadeInRight">
+                        <div class="card-header">Cases</div>
+                        <div class="card-body">
+                            <h5 class="card-title legal-stats-value">{{ cases_count }}</h5>
+                            <p class="card-text">Total Cases</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="text-muted text-center mt-3">Explore client details, lawyer profiles, and case statuses with ease.</p>
+        <div class="row justify-content-center legal-stats-btns">
+            <a class="animated-btn btn btn-primary btn-lg m-2" href="{% url 'cases:client_list' %}" role="button"><i class="fas fa-users"></i> View Clients</a>
+            <a class="animated-btn btn btn-dark btn-lg m-2" href="{% url 'cases:lawyer_list' %}" role="button"><i class="fas fa-gavel"></i> View Lawyers</a>
+            <a class="animated-btn btn btn-success btn-lg m-2" href="{% url 'cases:case_list' %}" role="button"><i class="fas fa-briefcase"></i> View Cases</a>
+        </div>
+    </div>
+</div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+
+
+
+  .legal-carousel-bg {
+    border-radius: 20px;
+    overflow: hidden;
+    margin-top: 20px;
+  }
+  .legal-carousel-inner {
+    border-radius: 20px;
+    box-shadow: 0 10px 32px #0067ff24;
+  }
+.legal-carousel-img {
+  height: 55vh;
+  object-fit: cover;
+  transition: transform 1.4s cubic-bezier(.22,.68,.5,1.71);
+}
+.legal-carousel-item.active .legal-carousel-img {
+  animation: zoomInScale 2.3s cubic-bezier(.22,.68,.5,1.71);
+}
+@keyframes zoomInScale {
+  from { transform: scale(1.08);}
+  to { transform: scale(1);}
+}
+.carousel-caption-title {
+  color: #FAF3E9;
+  text-shadow: 2px 3px 8px #012a44c9;
+  font-weight: 700;
+  font-size: 2.3rem;
+}
+.carousel-caption-desc {
+  color: #ffd57e;
+  font-size: 1.15rem;
+  font-weight: 500;
+  text-shadow: 0 2px 7px #00000077;
+}
+
+
+
+
+
+.legal-stats-jumbo {
+    border-radius: 24px;
+    box-shadow: 0 10px 38px #2a93e622, 0 2px 8px #0001;
+    padding: 36px 16px 34px 16px;
+}
+.legal-stats-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: #205274;
+    margin-bottom: 9px;
+}
+.legal-stats-desc {
+    font-size: 1.23rem;
+    color: #367fa1;
+    font-family: 'Montserrat', sans-serif;
+}
+.legal-stats-cards .card {
+    border-radius: 15px;
+    min-height: 165px;
+    transition: transform .21s cubic-bezier(.21,.61,.35,1), box-shadow .23s;
+    box-shadow: 0 6px 22px #5ea0cc22;
+}
+.legal-stats-card:hover {
+    transform: scale(1.045);
+    box-shadow: 0 18px 38px #45b6fd36;
+    z-index: 2;
+}
+.legal-stats-clients {
+    background: linear-gradient(135deg, #1880ff, #3edbfe14);
+    color: #fff;
+    border: none;
+}
+.legal-stats-lawyers {
+    background: linear-gradient(135deg, #21a370 86%, #4be93313);
+    color: #fff;
+    border: none;
+}
+.legal-stats-cases {
+    background: linear-gradient(135deg, #e74c3c, #ffe1eb55);
+    color: #fff;
+    border: none;
+}
+.legal-stats-value {
+    font-size: 2.6rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+.legal-stats-btns .btn {
+    min-width: 185px;
+    font-size: 1.17em;
+    font-weight: 600;
+    letter-spacing: .05em;
+    border-radius: 1.2em;
+    transition: box-shadow 0.28s, transform 0.31s;
+    box-shadow: 0 4px 16px #88b8e147;
+}
+.legal-stats-btns .btn:hover {
+    transform: translateY(-2px) scale(1.045);
+    box-shadow: 0 10px 30px #058bdd31;
+}
+@media (max-width: 768px) {
+    .legal-stats-cards .row { flex-direction: column; }
+    .legal-stats-cards .col-sm-4 { margin-bottom: 17px; }
+}
+
+
+    </style>
+
+
+
+
+{% endblock %}
