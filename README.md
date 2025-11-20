@@ -43,11 +43,48 @@ Legal clarity and access are no longer a privilege, but a necessity. NyayaSetu b
 
 ## Screenshots 🖼️
 
-| Dashboard                              | Case Import                         | Legal Bot                            |
-|-----------------------------------------|-------------------------------------|--------------------------------------|
-| ![Dashboard](Screenshots/dashboard.png) | ![Case Import](Screenshots/case_import.png) | ![Legal Bot](Screenshots/legal_bot.png) |
+All major flows in NyayaSetu are captured in the **Screenshots** folder:
 
-*(Update these paths to match your actual images and add more as needed!)*
+- `Screenshots/Dashboard.jpg` – Main dashboard overview
+- `Screenshots/Login_Page.jpg` – Login and role selection
+- `Screenshots/Admin_HomePage.jpg` – Admin home with key stats
+- `Screenshots/Admin_Login.jpg` – Admin authentication
+- `Screenshots/Admin_Search_Log.jpg` – Admin search history / logs
+- `Screenshots/Admin_UserQuery.jpg` – Admin view of user queries
+- `Screenshots/Document_Generator.jpg` – Auto document generator interface
+- `Screenshots/QAForm.jpg` – Q&A forum submission form
+- `Screenshots/Quiz.jpg` – Quiz/MCQ module interface
+
+These images give a quick visual tour of NyayaSetu’s UI for evaluators and recruiters.
+
+---
+
+## Quiz Module Content 🧠
+
+The **Quiz** folder contains text files with curated questions used in the Learning & Mock Test Hub:
+
+- `Quiz/Beginner Quiz.txt` – Basic legal awareness questions
+- `Quiz/Challenge Quizzes.txt` – Harder, scenario-based questions
+- `Quiz/Exam Prep Quizzes.txt` – Questions designed for exam-style practice
+- `Quiz/Law_Basics_Quiz.txt` – Core IPC/CrPC and fundamental legal concepts
+- `Quiz/Subject-wise Quizzes.txt` – Topic-wise grouped questions
+
+These files make it easy to update or extend the quiz bank without changing the code.
+
+---
+
+## Court Search & Case Import Module 🔍
+
+The **search module** folder documents how NyayaSetu’s automated case import works:
+
+- `search module/module 9 api story.txt` – Narrative and technical explanation of the API-based search feature (Module 9).  
+  It explains how the system:
+  - Takes an official case number as input  
+  - Calls the court website/API  
+  - Parses party names, dates, status, and judgment text  
+  - Saves results into the Django models with minimal manual typing
+
+This file is helpful for understanding the design decisions, API usage, and scraping/automation logic behind the case import feature.
 
 ---
 
