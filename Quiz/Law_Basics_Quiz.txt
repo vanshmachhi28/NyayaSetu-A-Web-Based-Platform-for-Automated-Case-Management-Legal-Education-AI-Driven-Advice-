@@ -1,0 +1,89 @@
+1. Question:
+
+Question text: What is the primary source of law in India?
+Opt a: Constitution
+Opt b: Parliament
+Opt c: Supreme Court
+Opt d: President
+Correct: a
+
+2. Question:
+
+Question text: Which article of the Indian Constitution guarantees the Right to Equality?
+Opt a: Article 14
+Opt b: Article 19
+Opt c: Article 21
+Opt d: Article 32
+Correct: a
+
+3. Question:
+
+Question text: What is the minimum age for becoming the President of India?
+Opt a: 30 years
+Opt b: 35 years
+Opt c: 25 years
+Opt d: 40 years
+Correct: b
+
+4. Question:
+
+Question text: Which of the following is a Fundamental Right under the Indian Constitution?
+Opt a: Right to Property
+Opt b: Right to Work
+Opt c: Right to Education
+Opt d: Right to Vote
+Correct: c
+
+5. Question:
+
+Question text: IPC stands for:
+Opt a: Indian Public Code
+Opt b: International Penal Code
+Opt c: Indian Penal Code
+Opt d: Internal Penal Code
+Correct: c
+
+6. Question:
+
+Question text: Who appoints the Chief Justice of India?
+Opt a: Prime Minister
+Opt b: Law Minister
+Opt c: President
+Opt d: Parliament
+Correct: c
+
+7. Question:
+
+Question text: What is "Habeas Corpus"?
+Opt a: Right to property
+Opt b: Right to be heard
+Opt c: Right to life
+Opt d: Right to produce a person before court
+Correct: d
+
+8. Question:
+
+Question text: Which of these courts is the highest judicial authority in India?
+Opt a: High Court
+Opt b: District Court
+Opt c: Supreme Court
+Opt d: Civil Court
+Correct: c
+
+9. Question:
+
+Question text: In which year was the Constitution of India adopted?
+Opt a: 1947
+Opt b: 1950
+Opt c: 1949
+Opt d: 1952
+Correct: c
+
+10. Question:
+
+Question text: Which legal principle means "Let the buyer beware"?
+Opt a: Caveat emptor
+Opt b: Habeas corpus
+Opt c: Bona fide
+Opt d: Ex parte
+Correct: a

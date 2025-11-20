@@ -1,0 +1,76 @@
+🎓 Exam Prep Quizzes
+
+Quiz Title: CLAT Legal Reasoning Quiz
+Purpose: Practice for law entrance exams like CLAT.
+
+Questions:
+
+Which of the following is a tort?
+a) Theft
+b) Breach of contract
+c) Negligence
+d) Kidnapping
+✅ Correct: c
+
+Which law protects consumers in India?
+a) Consumer Protection Act, 1986
+b) Consumer Rights Act, 2015
+c) CPA 2000
+d) Buyers’ Act, 2004
+✅ Correct: a
+
+In contract law, 'offer + acceptance = ?'
+a) Proposal
+b) Promise
+c) Agreement
+d) Contract
+✅ Correct: c
+
+A person dies without a will. What is the process of distributing property called?
+a) Partition
+b) Inheritance
+c) Intestate succession
+d) Willing
+✅ Correct: c
+
+A minor enters into a contract. Is it valid?
+a) Yes
+b) No
+c) Only if in writing
+d) Depends on guardian
+✅ Correct: b
+
+Mens Rea is essential in:
+a) Civil cases
+b) Contract cases
+c) Criminal cases
+d) Property cases
+✅ Correct: c
+
+Which of the following is not a source of law?
+a) Custom
+b) Legislation
+c) Religion
+d) Gossip
+✅ Correct: d
+
+What is the maximum punishment for theft under IPC?
+a) 1 year
+b) 3 years
+c) 5 years
+d) 7 years
+✅ Correct: d
+
+Res Judicata means:
+a) Case is under trial
+b) Judgment reserved
+c) Case already decided
+d) Case transferred
+✅ Correct: c
+
+In which case is Article 21 interpreted broadly?
+a) Kesavananda Bharati
+b) Golaknath
+c) Maneka Gandhi
+d) A.K. Gopalan
+✅ Correct: c

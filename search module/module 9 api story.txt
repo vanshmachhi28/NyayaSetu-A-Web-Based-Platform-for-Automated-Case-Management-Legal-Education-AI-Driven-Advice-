@@ -1,0 +1,318 @@
+How to Integrate Google Custom Search API for Web Searches
+1. Get Google Custom Search API Key and Search Engine ID
+Go to Google Cloud Console.
+
+Create a project (or use existing).
+
+Enable Custom Search API.
+
+Create API key in Credentials.
+
+Configure a Custom Search Engine (https://cse.google.com/cse/all) to search the entire web or specific sites.
+
+Get your Search Engine ID (cx param).
+
+2. Install Google API client (optional) or use requests
+bash
+pip install google-api-python-client
+3. Create Search Utility
+File: cases/utils.py
+
+python
+from googleapiclient.discovery import build
+
+def google_web_search(query, api_key, cse_id, num=5):
+    service = build("customsearch", "v1", developerKey=api_key)
+    res = service.cse().list(q=query, cx=cse_id, num=num).execute()
+    results = []
+    for item in res.get('items', []):
+        results.append({
+            'title': item.get('title'),
+            'link': item.get('link'),
+            'snippet': item.get('snippet'),
+        })
+    return results
+4. Modify Search View cases/views.py
+python
+from django.conf import settings
+from .utils import google_web_search
+
+@login_required
+def advanced_search(request):
+    query = request.GET.get("q", "")
+    filter_type = request.GET.get("type", "all")
+    results = []
+    count = 0
+
+    if query:
+        if filter_type in ["all", "case"]:
+            results += list(Case.objects.filter(title__icontains=query))
+        if filter_type in ["all", "document"]:
+            results += list(Document.objects.filter(name__icontains=query))
+        # Add more local DB filters here
+
+        # Call Google Search for external results if type=web or all
+        if filter_type in ["all", "web"]:
+            api_key = settings.GOOGLE_API_KEY
+            cse_id = settings.GOOGLE_SEARCH_ENGINE_ID
+            web_results = google_web_search(query, api_key, cse_id)
+            results += web_results
+
+        count = len(results)
+        UserSearchLog.objects.create(
+            user=request.user, query=query, results_count=count, category=filter_type
+        )
+
+    return render(request, "search/advanced_search.html", {
+        "query": query,
+        "results": results,
+        "filter_type": filter_type
+    })
+5. Add Your API Keys in settings.py
+python
+GOOGLE_API_KEY = "your_google_api_key_here"
+GOOGLE_SEARCH_ENGINE_ID = "your_search_engine_id"
+6. Update UI for Web Search Option
+In search form template (cases/templates/search/advanced_search.html):
+
+Add in <select name="type">:
+
+xml
+<option value="web" {% if filter_type == "web" %}selected{% endif %}>Web Search</option>
+Is an API Required?
+For your current local DB-only search, no API required.
+
+For web search integration, yes, Google Custom Search API (or similar API) is required.
+
+Summary Table
+Step	Action
+Obtain Google API key + Search Engine ID	Setup Google CSE
+Install packages and utils	google-api-python-client
+Modify search view to call API	Update searches with API call
+Update templates for "Web Search" option	Add dropdown option
+Add API keys to settings	Securely store in settings.py
+
+
+
+
+
+
+
+
+
+
+
+
+Here is a detailed step-by-step guide to get your Google Custom Search API key and Search Engine ID (cx param):
+
+Step 1: Open Google Cloud Console
+Visit https://console.cloud.google.com/
+
+If not signed in, log in with your Google account.
+
+Step 2: Create a New Project
+Click the project dropdown at top left (near Google Cloud Platform logo).
+
+Click New Project.
+
+Enter a name for your project (e.g., "NyayaSetu Search").
+
+Optionally, select organization or leave as "No organization".
+
+Click Create.
+
+Wait for the project to be created and selected.
+
+Step 3: Enable the Custom Search API
+In the left menu, click APIs & Services > Library.
+
+In the search box, type Custom Search API and select it from results.
+
+Click Enable.
+
+Step 4: Create API Credentials (API Key)
+After enabling, click Create Credentials button.
+
+Choose API Key.
+
+The API key will be generated and shown—copy this key.
+
+(Optional) Restrict key usage for security in "API key restrictions."
+
+Step 5: Setup Custom Search Engine (CSE)
+Open https://cse.google.com/cse/all
+
+Click Add to create a new search engine.
+
+In "Sites to search," enter sites or leave blank to search the entire web.
+
+To search entire web, enter www.example.com first, then later set it to search the full web in options.
+
+Choose language and name your search engine.
+
+Create the engine.
+
+Step 6: Modify Your CSE to Search the Entire Web
+After creation, click Control Panel for your search engine.
+
+Find the "Sites to search" section.
+
+Click “Edit” and Select “Search the entire web but emphasize included sites”.
+
+Save.
+
+Step 7: Get Search Engine ID (cx)
+In the control panel page, at the top you will see Search engine ID (a string of letters and numbers).
+
+Copy this Search Engine ID.
+
+Step 8: Use the API Key and CSE ID in your Django project
+Go to your Django settings.py and add:
+
+python
+GOOGLE_API_KEY = "YOUR_API_KEY_HERE"
+GOOGLE_SEARCH_ENGINE_ID = "YOUR_SEARCH_ENGINE_ID_HERE"
+You have now successfully created your Google API Key and Search Engine ID, ready to integrate the API calls in your Django app!
+
+
+
+
+
+
+
+
+
+
+
+
+
+For Google Custom Search API (and almost all server-to-server API usage in Django),
+choose:
+
+Application data (Not "User data")
+
+Reason:
+You want your Django project to call the API directly (not on behalf of a user's Google account).
+"Application data" gives you an API key appropriate for backend/script/app-to-Google requests.
+
+Now, repeat step-by-step from step 3:
+Step 3: Enable the Custom Search API (Already Done)
+(You’ve just enabled it – continue.)
+
+Step 4: Create API Key
+In the Google Cloud dashboard, go to APIs & Services > Credentials.
+
+Choose Create Credentials > API key (in the "Add credentials" top bar).
+
+An API key pops up—copy it and save it for Django settings.
+
+Optionally, click "Restrict key" and allow only the Custom Search API, and restrict by HTTP referrer or IP for security.
+
+Step 5: Create Custom Search Engine (CSE) for Web Searching
+Go to https://cse.google.com/cse/all
+
+Click Add.
+
+Under "Sites to search", put a website:
+
+If you want to search the whole web, just put www.example.com as a placeholder (you will change this in a later step).
+
+Name your search engine anything (Ex: "NyayaSetu Web Search").
+
+Click Create.
+
+Step 6: Set CSE to Entire Web
+Click the Control Panel button for your new search engine.
+
+Under "Sites to search", click Edit.
+
+Choose Search the entire web but emphasize included sites.
+
+Save!
+
+Step 7: Find Your CSE ID (cx)
+At the top of the custom engine "Control Panel" page, you will see Search engine ID (something like 012345678901234567890:abcdefg...)
+
+Copy this ID — this is your "cx" for the API!
+
+Step 8: Save Them in Django
+In your Django settings.py:
+
+python
+GOOGLE_API_KEY = "your_generated_api_key"
+GOOGLE_SEARCH_ENGINE_ID = "your_cse_id"
+That’s it!
+
+You now have an API Key and a Search Engine ID that can be used with Google Custom Search API from your Django server code.
+
+No OAuth or login from users required—this is fully backend/server-side.
+
+Let me know if you want ready-to-paste Python code to use these keys for live Google searches in your Django project!
+
+
+
+
+
+
+
+
+
+
+
+Great—your search engine is created!
+Here’s exactly how to get to the Control Panel and configure your engine to search the entire web (not just included sites), then fetch your Search Engine ID (cx):
+
+Step 6: Open Control Panel and Set "Search Entire Web"
+Go to All Search Engines List:
+Open https://cse.google.com/cse/all
+
+Find Your Search Engine:
+You’ll see a list with the name you created (e.g. "NyayaSetu Web Search").
+
+Open the Control Panel:
+
+Click on the name of your search engine (not the pencil or trash).
+
+This brings you to the Control Panel for that search engine.
+
+Alternatively, if you’re on the “Your new search engine has been created” page, click “Customise”. This opens the Control Panel.
+
+Set Engine to Search the Entire Web:
+
+In the Control Panel, locate the “Sites to search” section.
+
+You’ll see your original included site (www.example.com or whatever you first entered).
+
+Just below that, select "Search the entire web but emphasize included sites" (or a similar option, commonly under a “Search the entire web” heading).
+
+Save your changes!
+
+Step 7: Find and Copy the Search Engine ID (cx param)
+After saving, look in the Control Panel (top right or somewhere visible).
+
+You'll find “Search engine ID” with a code that looks like a215319d822e1406b or similar.
+
+Copy this Search Engine ID—you’ll need it for your Django settings.
+
+Step 8: Put API Key and Search Engine ID in Django
+File: djangoProject/settings.py (or your main settings module):
+
+python
+GOOGLE_API_KEY = "YOUR GENERATED API KEY"
+GOOGLE_SEARCH_ENGINE_ID = "YOUR SEARCH ENGINE ID"
+Quick Recap Table
+Step	Where	What to do
+6	https://cse.google.com/cse/all	Click your engine name to enter Control Panel
+Control Panel	Change “Sites to search” to “Search the entire web”
+7	Control Panel	See “Search engine ID”, copy the code
+8	djangoProject/settings.py	Paste API key and CSE ID in your Django settings
+
+
+
+
+
+
+
+
+
+
