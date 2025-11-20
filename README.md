@@ -33,3 +33,19 @@ NyayaSetu isn’t just a software project—it’s a step toward more open, effi
 Embrace the future of law with NyayaSetu! 🌐⚖️
 
 "Connecting legal minds with technology, one case at a time."
+
+
+## Database Setup
+
+1. Create an empty MySQL database.
+2. Configure database credentials in `djangoProject/settings.py`.
+3. Run:
+python manage.py migrate
+
+text
+to set up tables.
+4. (Optional) If you want demo data, use provided fixtures or follow instructions in the documentation.
+
+
+
+
