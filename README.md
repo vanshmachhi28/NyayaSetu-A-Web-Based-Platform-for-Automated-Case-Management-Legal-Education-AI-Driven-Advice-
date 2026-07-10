@@ -135,18 +135,6 @@ This file is helpful for understanding the design decisions, API usage, and scra
 
 ---
 
-## Contributing
-
-Contributions, issues, and feature requests are welcome—fork the repository and submit a pull request!
-
----
-
-## License
-
-This project is open source. See `LICENSE` for details.
-
----
-
 ## Contact
 
 Developed by Vansh Prakash Machhi  
